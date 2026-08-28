@@ -1,0 +1,61 @@
+services:
+  mariadb:
+    networks: 
+      - n_inception
+    build: mariadb
+    environment:
+      - DBNAME=${DBNAME}
+      - DBUSER=${DBUSER}
+      - DBPASSWORD=${DBPASSWORD}
+    healthcheck:
+      test: ["CMD","mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 3
+      timeout: 10s
+
+  php-fpm:
+    volumes: 
+      - data:/WordPress
+    build: wordpress
+    networks:
+      - n_inception
+    environment:
+      - WPUSER_ADMIN=${WPUSER_ADMIN}
+      - WPPASS_ADMIN=${WPPASS_ADMIN}
+      - WPEMAIL_ADMIN=${WPEMAIL_ADMIN}
+      - WPTITLE=${WPTITLE}
+      - WPURL=${WPURL}
+      - WPUSER=${WPUSER}
+      - WPPASSWORD=${WPPASSWORD}
+      - WPEMAIL=${WPEMAIL}
+      - WPROLE=${WPROLE}
+      - DBNAME=${DBNAME}
+      - DBUSER=${DBUSER}
+      - DBPASSWORD=${DBPASSWORD}
+      - DBHOST=${DBHOST}
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    # healthcheck:
+    #   test: ["CMD",  "ping" , "-h", "folder_inception-php-fpm-1"]
+    #   interval: 5s
+    #   retries: 3
+    #   timeout: 10s
+  nginx:
+    networks: 
+      - n_inception
+    volumes:
+      - data:/WordPress
+    build: nginx
+    ports: 
+      - 8080:80
+    environment:
+      - FPM_PHPHOST=${FPM_PHPHOST}
+    # depends_on:
+    #       php-fpm:
+    #         condition: service_healthy
+volumes:
+  data:
+networks :
+  n_inception:
+
