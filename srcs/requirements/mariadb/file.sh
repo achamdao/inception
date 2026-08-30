@@ -1,6 +1,6 @@
 #!/bin/bash
+export DBPASSWORD=$(cat /run/secrets/DBPASS)
 service mariadb start
-
 sleep 3
 mariadb -u root <<o
 CREATE USER $DBUSER IDENTIFIED BY '$DBPASSWORD';
@@ -11,6 +11,7 @@ mariadb -u $DBUSER -p$DBPASSWORD <<o
 CREATE DATABASE IF NOT EXISTS $DBNAME;
 
 USE $DBNAME;
+
 o
 echo mariadb is ready ...
 sleep infinity

@@ -1,4 +1,7 @@
 
+export WPPASS_ADMIN=$(cat /run/secrets/WP_PASS_AD)
+export WPPASSWORD=$(cat /run/secrets/WP_PASS_USER)
+export DBPASSWORD=$(cat /run/secrets/DBPASS)
 wb core download --allow-root
 sed -i "s#require __DIR__ . '/wp-blog-header.php';#require __DIR__ . '/wp-login.php';#g" index.php
 rm -rf /wp-config.php

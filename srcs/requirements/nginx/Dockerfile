@@ -4,5 +4,6 @@ COPY ./config.conf /etc/nginx/nginx.conf
 COPY ./nginx-selfsigned.key /etc/nginx/signedkey.key
 COPY  ./certafic.crt /etc/nginx/certafic.crt
 COPY ./file.sh .
+RUN  apt install -y curl
 WORKDIR /WordPress
 CMD sh /file.sh
