@@ -8,23 +8,25 @@ services:
     build: requirements/mariadb
     image: mariadb
     environment:
-      - DBNAME=${DBNAME}
-      - DBUSER=${DBUSER}
+      - DBNAME
+      - DBUSER
     volumes:
       - maria_db_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${DBUSER}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
       interval: 10s
       retries: 3
       timeout: 10s
 
-  php-fpm:
+
+
+  wordpress:
     secrets:
       - DBPASS
       - WP_PASS_AD
       - WP_PASS_USER
-    container_name: php-fpm
-    image: php-fpm
+    container_name: wordpress
+    image: wordpress
     volumes: 
       - data:/WordPress
     build: requirements/wordpress
@@ -33,16 +35,16 @@ services:
     networks:
       - n_inception
     environment:
-      - WPUSER_ADMIN=${WPUSER_ADMIN}
-      - WPEMAIL_ADMIN=${WPEMAIL_ADMIN}
-      - WPTITLE=${WPTITLE}
-      - WPURL=${WPURL}
-      - WPUSER=${WPUSER}
-      - WPEMAIL=${WPEMAIL}
-      - WPROLE=${WPROLE}
-      - DBNAME=${DBNAME}
-      - DBUSER=${DBUSER}
-      - DBHOST=${DBHOST}
+      - WPUSER_ADMIN
+      - WPEMAIL_ADMIN
+      - WPTITLE
+      - WPURL
+      - WPUSER
+      - WPEMAIL
+      - WPROLE
+      - DBNAME
+      - DBUSER
+      - DBHOST
     depends_on:
       mariadb:
         condition: service_healthy
@@ -55,6 +57,7 @@ services:
     container_name: nginx
     networks: 
       - n_inception
+    restart: on-failure:3
     volumes:
       - data:/WordPress
     build: requirements/nginx
@@ -62,15 +65,15 @@ services:
     ports: 
       - 443:443
     environment:
-      - FPM_PHPHOST=${FPM_PHPHOST}
+      - FPM_PHPHOST
     depends_on:
-          php-fpm:
+          wordpress:
             condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-k",  "https://localhost:443"]
-      interval: 10s
-      retries: 3
-      timeout: 10s
+
+
+
+
+
 secrets:
   DBPASS:
     file: ../secrets/DBPASS.env
@@ -78,11 +81,26 @@ secrets:
     file: ../secrets/WP_PASS_AD.env
   WP_PASS_USER:
     file: ../secrets/WP_PASS_USER.env
+
+
+
 volumes:
   data:
     name: data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/achamdao/data/Wordpress_files
   maria_db_data:
     name: maria_db_data
+    driver: local
+    driver_opts: 
+      type: none
+      o: bind
+      device: /home/achamdao/data/Wordpress_database
+
+
 networks :
   n_inception:
     name: n_inception
