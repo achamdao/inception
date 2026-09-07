@@ -13,16 +13,13 @@ while ! mysqladmin ping --silent ;do
 done
 mariadb -u root <<o
 CREATE USER $DBUSER IDENTIFIED BY '$DBPASSWORD';
-GRANT ALL ON *.* TO $DBUSER;
+GRANT ALL ON $DBNAME.* TO $DBUSER;
 o
 
 mariadb -u $DBUSER -p$DBPASSWORD <<o
 CREATE DATABASE IF NOT EXISTS $DBNAME;
 
-USE $DBNAME;
-
 o
-
 service mariadb stop
 
 echo mariadb is ready ...
