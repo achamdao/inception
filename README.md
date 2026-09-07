@@ -3,6 +3,45 @@ This project has been created as part of the 42 curriculum by achamdao
 # Description
 The goal of this project is to practice and understand how the Docker platform works, how to manage containers, and what a container, image, Dockerfile, Docker Compose, and Docker network are. It also covers container isolation, and how to test and set up your app in a single container and across multiple containers
 
+# Instructions
+#### 1- install docker engine
+
+    - https://docs.docker.com/engine/install/debian/
+
+#### 2- cloning repository
+    - write in your terminal git clone <repo>
+
+#### 3- compilation
+    - write in your terminal cd <repo> directory
+
+    - write [make] command for create diroctory of storage of the volume , build images : mariadb ; wordpress ; nginx , run containers 
+
+    - write [make clean] command if you want stop and remove containers and images 
+
+    - write [make fclean] command if you want stop and remove containers and images and volumes and 
+    mounted diroctory
+
+    - write [make re] command for rebuild the project
+#### 4- Access the Website
+
+    - open your browser and write https://achamdao.42.fr/
+
+    - if not work this URL go to /etc/hosts and add this:  127.0.1.1       achamdao.42.fr
+
+    - enter login and password is found in this file secrets/WP_PASS_AD.env and user in .env file in root
+
+# Resources
+- https://docs.docker.com/get-started/
+- https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04
+- https://www.cloudflare.com/learning/ssl/what-is-a-session-key/
+- https://mariadb.com/docs/server/mariadb-quickstart-guides/basics-guide
+- https://nginx.org/en/docs/http/configuring_https_servers.html
+- https://nginx.org/en/docs/http/ngx_http_fastcgi_module.html
+- https://www.php.net/manual/en/install.fpm.php
+- https://www.digitalocean.com/community/tutorials/php-fpm-nginx
+- https://www.thatsgeeky.com/2012/02/directly-connecting-to-php-fpm/
+- In this project, I used AI to explain documentation, correct my English, and translate text.
+
 # Project description
 ### Description
 - **Using Docker:** I used Docker to set up the entire web infrastructure. This was achieved by creating three isolated containers that work together to host the database, process the backend, and serve the website securely.
@@ -49,43 +88,3 @@ The goal of this project is to practice and understand how the Docker platform w
 - Docker Volumes: This is a storage space created and managed by the Docker Daemon on your disk. You can link it to a single Container or share it among multiple Containers, and this is done by mounting it.
 
 - Bind Mounts: This provides an alternate view of a directory. It links a host directory to a container and points to a specific resource; it simply creates a portal to access that existing directory without copying the data.
-
-# Instructions
-#### 1- install docker engine
-
-    - https://docs.docker.com/engine/install/debian/
-
-#### 2- cloning repository
-    - write in your terminal git clone <repo>
-
-#### 3- compilation
-    - write in your terminal cd <repo> directory
-
-    - write [make] command for create diroctory of storage of the volume , build images : mariadb ; wordpress ; nginx , run containers 
-
-    - write [make clean] command if you want stop and remove containers and images 
-
-    - write [make fclean] command if you want stop and remove containers and images and volumes and 
-    mounted diroctory
-
-    - write [make re] command for rebuild the project
-#### 4- Access the Website
-
-    - open your browser and write https://achamdao.42.fr/
-
-    - if not work this URL go to /etc/hosts and add this:  127.0.1.1       achamdao.42.fr
-
-    - enter login and password is found in this file secrets/WP_PASS_AD.env and user in .env file in root 
-
-
-# Resources
-- https://docs.docker.com/get-started/
-- https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04
-- https://www.cloudflare.com/learning/ssl/what-is-a-session-key/
-- https://mariadb.com/docs/server/mariadb-quickstart-guides/basics-guide
-- https://nginx.org/en/docs/http/configuring_https_servers.html
-- https://nginx.org/en/docs/http/ngx_http_fastcgi_module.html
-- https://www.php.net/manual/en/install.fpm.php
-- https://www.digitalocean.com/community/tutorials/php-fpm-nginx
-- https://www.thatsgeeky.com/2012/02/directly-connecting-to-php-fpm/
-- In this project, I used AI to explain documentation, correct my English, and translate text.

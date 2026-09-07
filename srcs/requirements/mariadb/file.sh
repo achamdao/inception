@@ -12,7 +12,7 @@ while ! mysqladmin ping --silent ;do
     sleep 2
 done
 mariadb -u root <<o
-CREATE USER $DBUSER IDENTIFIED BY '$DBPASSWORD';
+CREATE USER IF NOT EXISTS $DBUSER IDENTIFIED BY '$DBPASSWORD';
 GRANT ALL ON $DBNAME.* TO $DBUSER;
 o
 
