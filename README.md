@@ -41,6 +41,7 @@ The goal of this project is to practice and understand how the Docker platform w
 - https://www.digitalocean.com/community/tutorials/php-fpm-nginx
 - https://www.thatsgeeky.com/2012/02/directly-connecting-to-php-fpm/
 - In this project, I used AI to explain documentation, correct my English, and translate text.
+- https://thecontainerdbook.com/chapters/part-1/01-container-stack-map
 
 # Project description
 ### Description
