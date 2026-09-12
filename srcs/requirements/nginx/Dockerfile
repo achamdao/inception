@@ -7,6 +7,5 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/nginx
 RUN apt install -y procps
 COPY ./config.conf /etc/nginx/nginx.conf
 RUN sed -i "s@fastcgi_pass  FPM_PHPHOST;@fastcgi_pass $FPM_PHPHOST;@g" /etc/nginx/nginx.conf
-RUN cat /etc/nginx/nginx.conf && sleep 100
 WORKDIR /WordPress
 ENTRYPOINT ["nginx","-g", "daemon off;"]
