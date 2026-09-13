@@ -42,5 +42,6 @@ This document provides a simple guide for administrators to understand, deploy, 
 - Use this command to show detailed information about a specific volume (replace `<volume_name>` with the actual name):
   `sudo docker volume inspect <volume_name>`
 - **how it persists**
-  - By default, data created inside a container is stored in its ephemeral writable layer, which is destroyed when the container is removed (not stopped). To solve this data loss
-    problem, we use a Volume mounted to a directory inside the container. This ensures the data remains persistent and is never lost
+  - in create container is stored data in RAM so data remainded life just in running container is destroyed in stop container
+  - for solve problem of destroying data in stop docker , we stored data in volume mouted with directory in container 
+    so in stop contaner the data is alive and don t forget

@@ -19,8 +19,6 @@ services:
       retries: 3
       timeout: 10s
 
-
-
   wordpress:
     secrets:
       - DBPASS
@@ -63,7 +61,7 @@ services:
     build: requirements/nginx
     image: nginx
     ports: 
-      - 443:80
+      - 443:443
     environment:
       - FPM_PHPHOST
     depends_on:
@@ -104,4 +102,3 @@ volumes:
 networks :
   n_inception:
     name: n_inception
-

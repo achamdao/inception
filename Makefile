@@ -4,7 +4,7 @@ run:
 	@echo " ✔ create folders of the volumes ..."
 	@sudo mkdir -p /home/achamdao/data/Wordpress_database /home/achamdao/data/Wordpress_files
 	@echo " ✔ build and run the contaners ..."
-	@sudo docker compose -f ./srcs/docker-compose.yml up --build
+	@sudo docker compose -f ./srcs/docker-compose.yml up --build -d
 stop:
 	@sudo docker compose -f ./srcs/docker-compose.yml stop
 start:
