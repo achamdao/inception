@@ -18,7 +18,7 @@ You can easily control the entire lifecycle of the project using the provided `M
 Before accessing the site, ensure your local DNS is configured properly. You must add the following line to your `/etc/hosts` file (requires sudo privileges):
 `127.0.1.1       achamdao.42.fr`
 
-* **Website Access:** Open your web browser and write to `https://achamdao.42.fr/`
+* **Website Access:** Open your web browser and write to `https://achamdao.42.fr/` or `https://achamdao.42.fr/wp-admin`
 
 ## 4. Locate and manage credentials
 For security reasons, passwords and sensitive data are not hardcoded. They are injected into the containers upon startup:
